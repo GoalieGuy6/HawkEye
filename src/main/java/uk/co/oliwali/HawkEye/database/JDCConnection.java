@@ -17,7 +17,6 @@ import java.sql.Statement;
 import java.sql.Struct;
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.Executor;
 
 public class JDCConnection implements Connection
 {
@@ -311,31 +310,6 @@ public class JDCConnection implements Connection
 		try {
 			conn.close();
 		} catch (final SQLException ex) {}
-	}
-
-	@Override
-	public void abort(Executor executor) throws SQLException {
-		conn.abort(executor);
-	}
-
-	@Override
-	public int getNetworkTimeout() throws SQLException {
-		return conn.getNetworkTimeout();
-	}
-
-	@Override
-	public String getSchema() throws SQLException {
-		return conn.getSchema();
-	}
-
-	@Override
-	public void setNetworkTimeout(Executor executor, int milliseconds) throws SQLException {
-		conn.setNetworkTimeout(executor, milliseconds);
-	}
-
-	@Override
-	public void setSchema(String schema) throws SQLException {
-		conn.setSchema(schema);
 	}
 
 }

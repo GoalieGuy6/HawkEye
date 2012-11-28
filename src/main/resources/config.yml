@@ -47,10 +47,9 @@ general:
     debug-level: low
     max-radius: 0
     give-user-tool: true
-    tool-block: '17'
+    tool-block: '20'
     default-here-radius: 5
     default-tool-command: ''
-    check-for-updates: true
     op-permissions: false
 mysql:
     hawkeye-table: hawkeye
@@ -65,7 +64,7 @@ mysql:
 ignore-worlds:
 - thisworldisignored
 - soisthisone
-version: 1.0.5b
+version: 2.0
 command-filter:
 - /login
 - /restartsrv

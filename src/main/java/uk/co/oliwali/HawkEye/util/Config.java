@@ -26,7 +26,6 @@ public class Config {
 	public static String CleanseAge;
 	public static String CleansePeriod;
 	public static boolean GiveTool;
-	public static boolean CheckUpdates;
 	public static boolean Debug;
 	public static Util.DebugLevel DebugLevel;
 	public static boolean LogIpAddresses;
@@ -67,7 +66,6 @@ public class Config {
 		CleanseAge = config.getString("general.cleanse-age");
 		CleansePeriod = config.getString("general.cleanse-period");
 		GiveTool = config.getBoolean("general.give-user-tool");
-		CheckUpdates = config.getBoolean("general.check-for-updates");
 		Debug = config.getBoolean("general.debug");
 		LogIpAddresses = config.getBoolean("general.log-ip-addresses");
 		DeleteDataOnRollback = config.getBoolean("general.delete-data-on-rollback");
