@@ -41,7 +41,6 @@ import uk.co.oliwali.HawkEye.listeners.MonitorPlayerListener;
 import uk.co.oliwali.HawkEye.listeners.MonitorWorldListener;
 import uk.co.oliwali.HawkEye.listeners.ToolListener;
 import uk.co.oliwali.HawkEye.util.Config;
-import uk.co.oliwali.HawkEye.util.Permission;
 import uk.co.oliwali.HawkEye.util.Util;
 
 public class HawkEye extends JavaPlugin {
@@ -77,14 +76,13 @@ public class HawkEye extends JavaPlugin {
 		//Set up config and permissions
         PluginManager pm = getServer().getPluginManager();
 		server = getServer();
-		name = this.getDescription().getName();
-        version = this.getDescription().getVersion();
+		name = getDescription().getName();
+        version = getDescription().getVersion();
 
 		Util.info("Starting HawkEye " + version + " initiation process...");
 
 		//Load config and permissions
         config = new Config(this);
-        new Permission(this);
 
         versionCheck();
 
