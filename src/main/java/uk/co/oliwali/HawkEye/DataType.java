@@ -53,7 +53,9 @@ public enum DataType {
 	ENDERMAN_PLACE(33, BlockChangeEntry.class, "enderman-place", true, true),
     TREE_GROW(34, BlockChangeEntry.class, "tree-grow", true, true),
     MUSHROOM_GROW(35, BlockChangeEntry.class, "mushroom-grow", true, true),
-	ENTITY_KILL(36, DataEntry.class, "entity-kill", false, false);
+	ENTITY_KILL(36, DataEntry.class, "entity-kill", false, false),
+	ITEM_FRAME_BREAK(37, DataEntry.class, "item-frame-break", true, false),
+	ITEM_FRAME_PLACE(38, DataEntry.class, "item-frame-place", true, false);
 
 	private int id;
 	private boolean canHere;

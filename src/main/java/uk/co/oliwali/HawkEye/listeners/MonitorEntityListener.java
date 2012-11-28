@@ -7,16 +7,17 @@ import org.bukkit.block.Block;
 import org.bukkit.block.BlockState;
 import org.bukkit.entity.Enderman;
 import org.bukkit.entity.Entity;
+import org.bukkit.entity.ItemFrame;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.EntityDeathEvent;
 import org.bukkit.event.entity.EntityExplodeEvent;
-import org.bukkit.event.painting.PaintingBreakByEntityEvent;
-import org.bukkit.event.painting.PaintingBreakEvent;
-import org.bukkit.event.painting.PaintingBreakEvent.RemoveCause;
-import org.bukkit.event.painting.PaintingPlaceEvent;
+import org.bukkit.event.hanging.HangingBreakByEntityEvent;
+import org.bukkit.event.hanging.HangingBreakEvent;
+import org.bukkit.event.hanging.HangingBreakEvent.RemoveCause;
+import org.bukkit.event.hanging.HangingPlaceEvent;
 import org.bukkit.inventory.ItemStack;
 
 import uk.co.oliwali.HawkEye.DataType;
@@ -106,17 +107,21 @@ public class MonitorEntityListener extends HawkEyeListener {
 			DataManager.addEntry(new BlockEntry("Environment", DataType.EXPLOSION, b));
 	}
 
-	@HawkEvent(dataType = DataType.PAINTING_BREAK)
-	public void onPaintingBreak(PaintingBreakEvent event) {
+	@HawkEvent(dataType = {DataType.PAINTING_BREAK, DataType.ITEM_FRAME_BREAK})
+	public void onHangingBreak(HangingBreakEvent event) {
 		if (event.getCause() != RemoveCause.ENTITY) return;
-		PaintingBreakByEntityEvent e = (PaintingBreakByEntityEvent)event;
-		if (e.getRemover() instanceof Player)
-			DataManager.addEntry(new DataEntry((Player)e.getRemover(), DataType.PAINTING_BREAK, e.getPainting().getLocation(), ""));
+		HangingBreakByEntityEvent e = (HangingBreakByEntityEvent)event;
+		if (!(e.getRemover() instanceof Player)) return;
+		DataType type = DataType.PAINTING_BREAK;
+		if (e.getEntity() instanceof ItemFrame) type = DataType.ITEM_FRAME_BREAK;
+		DataManager.addEntry(new DataEntry((Player)e.getRemover(), type, e.getEntity().getLocation(), ""));
 	}
 
-	@HawkEvent(dataType = DataType.PAINTING_PLACE)
-	public void onPaintingPlace(PaintingPlaceEvent event) {
-		DataManager.addEntry(new DataEntry(event.getPlayer(), DataType.PAINTING_PLACE, event.getPainting().getLocation(), ""));
+	@HawkEvent(dataType = {DataType.PAINTING_PLACE, DataType.ITEM_FRAME_PLACE})
+	public void onHangingPlace(HangingPlaceEvent event) {
+		DataType type = DataType.PAINTING_PLACE;
+		if (event.getEntity() instanceof ItemFrame) type = DataType.ITEM_FRAME_PLACE;
+		DataManager.addEntry(new DataEntry(event.getPlayer(), type, event.getEntity().getLocation(), ""));
 	}
 
 	@HawkEvent(dataType = {DataType.ENDERMAN_PICKUP, DataType.ENDERMAN_PLACE})
